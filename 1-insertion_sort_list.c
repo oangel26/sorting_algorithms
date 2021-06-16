@@ -28,7 +28,7 @@ void insertion_sort_list(listint_t **list)
 				tmp->next->next = tmp;
 				tmp->next->prev = NULL;
 				tmp->next = NULL;
-				head = tmp->prev
+				head = tmp->prev;
 			}
 			/* EDGE case: first node and number of nodes > 2*/
 			else if (tmp->prev == NULL && tmp->next->next != NULL)
