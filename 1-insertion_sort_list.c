@@ -2,16 +2,17 @@
 
 
 /**
- * insertion_sort_list - sorts a list of int. in ascendig order (Insertion sort)
+ * insertion_sort_list - sorts a list of int. in ascendig order (Inset. sort)
  * @list: pointer to pointer to data structur listint_t
  * Return: Void
  */
+
+void swap_middle_nodes(listint_t **list);
 
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *head = NULL, *tmp = NULL;
 
-	/* Guard conditions for Null node */
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
@@ -33,22 +34,17 @@ void insertion_sort_list(listint_t **list)
 			/* EDGE case: first node and number of nodes > 2*/
 			else if (tmp->prev == NULL && tmp->next->next != NULL)
 			{
-                                tmp->prev = tmp->next;
+				tmp->prev = tmp->next;
 				tmp->next = tmp->next->next;
 				tmp->prev->next = tmp;
 				tmp->prev->prev = NULL;
-                                tmp->next->prev = tmp;
+				tmp->next->prev = tmp;
 				head = tmp->prev;
 			}
 			/* EDGE case: middle nodes */
 			else if (tmp->prev != NULL && tmp->next->next != NULL)
 			{
-				tmp->next->next->prev = tmp;
-				tmp->next->prev = tmp->prev;
-				tmp->prev = tmp->next;
-				tmp->next = tmp->prev->next;
-				tmp->prev->next = tmp;
-				tmp->prev->prev->next = tmp->prev;
+				swap_middle_nodes(&tmp);
 			}
 			/* EDGE case: last node */
 			else if (tmp->next->next == NULL)
@@ -60,9 +56,31 @@ void insertion_sort_list(listint_t **list)
 				tmp->next = NULL;
 			}
 			tmp = head;
+			*list = tmp;
 			print_list(tmp);
 			continue;
 		}
 		tmp = tmp->next;
 	}
+}
+
+/**
+ * swap_middle_nodes - swaps nodes in middle of a list
+ * @list: pointer to pointer to data structur listint_t
+ * Return: Void
+ */
+
+
+void swap_middle_nodes(listint_t **list)
+{
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+		return;
+
+
+	(*list)->next->next->prev = (*list);
+	(*list)->next->prev = (*list)->prev;
+	(*list)->prev = (*list)->next;
+	(*list)->next = (*list)->prev->next;
+	(*list)->prev->next = (*list);
+	(*list)->prev->prev->next = (*list)->prev;
 }
