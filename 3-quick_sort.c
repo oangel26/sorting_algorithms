@@ -50,8 +50,6 @@ void quicksort(int *array, size_t lo, size_t hi, size_t n)
 		quicksort(array, lo, i - 1, n);
 		quicksort(array, i + 1, hi, n);
 	}
-	else if (lo >= hi)
-		return;
 }
 
 /**
