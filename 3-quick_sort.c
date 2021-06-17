@@ -12,11 +12,15 @@ void quicksort(int *array, size_t lo, size_t hi, size_t n);
 
 void quick_sort(int *array, size_t size)
 {
+	if (array == NULL || size < 2)
+	{
+		return;
+	}
 	quicksort(array, 0, size - 1, size);
 }
 
 /**
- * quick_sort - sorts array of int. in ascending order using Quick sort algo.
+ * quicksort - sorts array of int. in ascending order using Quick sort algo.
  * @array: pointer to array of integers
  * @lo: low value of array
  * @hi: hi value of array
@@ -51,7 +55,7 @@ void quicksort(int *array, size_t lo, size_t hi, size_t n)
 }
 
 /**
- * quick_sort - sorts array of int. in ascending order using Quick sort algo.
+ * partition - partition of array accordint to pivot
  * @array: pointer to array of integers
  * @lo: low value of array
  * @hi: hi value of array
