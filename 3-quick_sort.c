@@ -1,5 +1,8 @@
 #include "sort.h"
 
+size_t partition(int *array, size_t lo, size_t hi, size_t n);
+void quicksort(int *array, size_t lo, size_t hi, size_t n);
+
 /**
  * quick_sort - sorts array of int. in ascending order using Quick sort algo.
  * @array: pointer to array of integers
@@ -7,13 +10,20 @@
  * Return: Void
  */
 
-size_t partition(int *array, size_t lo, size_t hi, size_t n);
-void quicksort(int *array, size_t lo, size_t hi, size_t n);
-
 void quick_sort(int *array, size_t size)
 {
 	quicksort(array, 0, size - 1, size);
 }
+
+/**
+ * quick_sort - sorts array of int. in ascending order using Quick sort algo.
+ * @array: pointer to array of integers
+ * @lo: low value of array
+ * @hi: hi value of array
+ * @n: size of array
+ * Return: position of pivot partition
+ */
+
 void quicksort(int *array, size_t lo, size_t hi, size_t n)
 {
 	size_t i;
@@ -28,9 +38,9 @@ void quicksort(int *array, size_t lo, size_t hi, size_t n)
 		quicksort(array, lo, i - 1, n);
 	}
 	else if (i == 0)
-        {
-                quicksort(array, i + 1, hi, n);
-        }
+	{
+		quicksort(array, i + 1, hi, n);
+	}
 	else if (i > 0)
 	{
 		quicksort(array, lo, i - 1, n);
@@ -40,30 +50,44 @@ void quicksort(int *array, size_t lo, size_t hi, size_t n)
 		return;
 }
 
+/**
+ * quick_sort - sorts array of int. in ascending order using Quick sort algo.
+ * @array: pointer to array of integers
+ * @lo: low value of array
+ * @hi: hi value of array
+ * @n: size of array
+ * Return: position of pivot partition
+ */
+
 size_t partition(int *array, size_t lo, size_t hi, size_t n)
 {
 	int pivot = array[hi];
 	size_t i = lo;
 	int tmp;
 	size_t j;
-	
+
 	for (j = lo; j < hi; j++)
 	{
 		if (array[j] < pivot)
 		{
-			/* Swap */
-			tmp = array[j];
-			array[j] = array[i];
-			array[i] = tmp;
 			if (j != i)
+			{
+				/* Swap */
+				tmp = array[j];
+				array[j] = array[i];
+				array[i] = tmp;
 				print_array(array, n);
+			}
 			i++;
 		}
 	}
 	/* Swap i and hi*/
-	tmp = array[i];
-	array[i] = array[hi];
-	array[hi] = tmp;
-	print_array(array, n);
-	return i;
+	if (i != hi)
+	{
+		tmp = array[i];
+		array[i] = array[hi];
+		array[hi] = tmp;
+		print_array(array, n);
+	}
+	return (i);
 }
