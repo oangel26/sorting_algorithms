@@ -32,6 +32,11 @@ void quicksort(int *array, size_t lo, size_t hi, size_t n)
 {
 	size_t i;
 
+	if (array == NULL)
+        {
+                return;
+        }
+
 	if (lo >= hi)
 		return;
 
@@ -67,6 +72,11 @@ size_t partition(int *array, size_t lo, size_t hi, size_t n)
 	size_t i = lo;
 	int tmp;
 	size_t j;
+
+	if (array == NULL)
+        {
+		return;
+        }
 
 	for (j = lo; j < hi; j++)
 	{
