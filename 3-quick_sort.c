@@ -75,7 +75,7 @@ size_t partition(int *array, size_t lo, size_t hi, size_t n)
 
 	if (array == NULL)
         {
-		return;
+		return (0);
         }
 
 	for (j = lo; j < hi; j++)
